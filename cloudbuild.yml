@@ -1,6 +1,3 @@
-substitutions:
-  _INSTANCE_NAME: "your-instance-name"  # Replace with your actual instance name
-  _ZONE: "us-central1-a"  # Replace with the zone where your instance is located
 
 logsBucket: gs://development-437521.appspot.com
 
@@ -34,11 +31,13 @@ steps:
     args:
       - '-c'
       - |
-        STATUS=$(gcloud compute instances describe $_INSTANCE_NAME --zone=$_ZONE --format='get(status)')
+        INSTANCE_NAME="your-instance-name"  # Replace with your actual instance name
+        ZONE="us-central1-a"  # Replace with the zone where your instance is located
+        STATUS=$(gcloud compute instances describe $INSTANCE_NAME --zone=$ZONE --format='get(status)')
         if [ "$STATUS" = "RUNNING" ]; then
-          gcloud compute instances reset $_INSTANCE_NAME --zone=$_ZONE
+          gcloud compute instances reset $INSTANCE_NAME --zone=$ZONE
         else
-          echo "Instance $_INSTANCE_NAME is not in RUNNING state. Current state: $STATUS"
+          echo "Instance $INSTANCE_NAME is not in RUNNING state. Current state: $STATUS"
         fi
 
 # Define the images being built and pushed
