@@ -1,5 +1,6 @@
 options:
   logging: CLOUD_LOGGING_ONLY
+  logsBucket: gs://development-437521.appspot.com
 
 steps:
   - name: 'gcr.io/cloud-builders/docker'
