@@ -1,6 +1,6 @@
 substitutions:
-  _INSTANCE_NAME: "instance-20241009-184712"  # Replace with your instance name
-  _ZONE: "us-central1-a"
+  INSTANCE_NAME: "instance-20241009-184712"  # Replace with your instance name
+  ZONE: "us-central1-a"
 
 logsBucket: gs://development-437521.appspot.com
 
@@ -34,8 +34,8 @@ steps:
     args:
       - '-c'
       - |
-        INSTANCE_NAME="${_INSTANCE_NAME}"  # Uses custom substitution
-        ZONE="${_ZONE}"  # Uses custom substitution
+        INSTANCE_NAME="${INSTANCE_NAME}"  # Uses custom substitution
+        ZONE="${ZONE}"  # Uses custom substitution
         STATUS=$(gcloud compute instances describe $INSTANCE_NAME --zone=$ZONE --format='get(status)')
         if [ "$STATUS" = "RUNNING" ]; then
           gcloud compute instances reset $INSTANCE_NAME --zone=$ZONE
