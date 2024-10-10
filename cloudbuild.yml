@@ -1,3 +1,4 @@
+
 steps:
   # Step 1: Build and push the first Docker image using Dockerfile.app1
   - name: 'gcr.io/cloud-builders/docker'
@@ -42,7 +43,7 @@ images:
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest'
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest'
 
-substitutions:
-  _INSTANCE_NAME: "instance-20241009-184712"  # Custom value
-  _ZONE: "us-central1-a"  # Custom value
+# Specify the logs bucket (Option 1)
+logsBucket: gs://your-bucket-name
+
 
