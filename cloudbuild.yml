@@ -13,15 +13,16 @@ steps:
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest']
 
-  # Step 3: Recreate the instances in the Managed Instance Group (MIG)
+  # Step 3: Restart all instances in the Managed Instance Group (MIG)
   - name: 'gcr.io/cloud-builders/gcloud'
     args:
       - 'compute'
       - 'instance-groups'
       - 'managed'
-      - 'recreate-instances'
+      - 'rolling-action'
+      - 'restart'
       - 'instance-group-1-m7r1'  # Replace with your actual MIG name
-      - '--zone=us-central1-'  # Replace with the zone where your MIG is located (or use --region if it is regional)
+      - '--zone=us-central1'  # Replace with your actual zone
 
 # Define the images being built and pushed
 images:
