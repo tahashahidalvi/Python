@@ -1,10 +1,18 @@
 logsBucket: gs://development-437521.appspot.com
 
 steps:
+  # Build and push the first Docker image using Dockerfile.app1
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'us-west4-docker.pkg.dev/development-437521/test-deployment/my-app:latest', '.']
+    args: ['build', '-f', 'Dockerfile.app1', '-t', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest', '.']
   - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'us-west4-docker.pkg.dev/development-437521/test-deployment/my-app:latest']
+    args: ['push', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest']
+
+  # Build and push the second Docker image using Dockerfile.app2
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-f', 'Dockerfile.app2', '-t', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest']
 
 images:
-  - 'us-west4-docker.pkg.dev/development-437521/test-deployment/my-app:latest'
+  - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest'
+  - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest'
