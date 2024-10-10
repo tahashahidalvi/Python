@@ -10,11 +10,5 @@ COPY . /app
 # Expose port 80 to the outside world
 EXPOSE 80
 
-# Copy the entrypoint script into the container
-COPY entrypoint.sh /entrypoint.sh
-
-# Make the entrypoint script executable
-RUN chmod +x /entrypoint.sh
-
-# Use the entrypoint script to start the container
-CMD ["/entrypoint.sh"]
+# Run a simple HTTP server on port 80
+CMD ["python", "-m", "http.server", "8000"]
