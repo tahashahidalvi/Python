@@ -1,4 +1,5 @@
 
+
 logsBucket: gs://development-437521.appspot.com
 
 steps:
@@ -25,8 +26,22 @@ steps:
       - 'instance-group-1'  # Replace with your actual MIG name
       - '--region=us-central1'  # Replace with the region where your MIG is located
 
+  # Step 4: Restart a specific instance if it is in the running state
+  - name: 'gcr.io/cloud-builders/gcloud'
+    entrypoint: 'bash'
+    args:
+      - '-c'
+      - |
+        INSTANCE_NAME="instance-20241009-184712"  # Replace with your actual instance name
+        ZONE="us-central1-a"  # Replace with the zone where your instance is located
+        STATUS=$(gcloud compute instances describe $INSTANCE_NAME --zone=$ZONE --format='get(status)')
+        if [ "$STATUS" = "RUNNING" ]; then
+          gcloud compute instances reset $INSTANCE_NAME --zone=$ZONE
+        else
+          echo "Instance $INSTANCE_NAME is not in RUNNING state. Current state: $STATUS"
+        fi
+
 # Define the images being built and pushed
 images:
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest'
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest'
-
