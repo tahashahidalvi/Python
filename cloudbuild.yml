@@ -22,7 +22,7 @@ steps:
       - 'rolling-action'
       - 'restart'
       - 'instance-group-1-m7r1'  # Replace with your actual MIG name
-      - '--region=us-central1'  # Use the region here
+      - '--zone=us-central1-a'  # Use the region here
 
 # Define the images being built and pushed
 images:
