@@ -1,8 +1,14 @@
-# Use a lightweight base image
-FROM alpine:latest
+# Use the official Python image from the Docker Hub
+FROM python:3.9-slim
 
-# Set a label for the image
-LABEL maintainer="you@example.com"
+# Set the working directory in the container
+WORKDIR /app
 
-# Command to run when the container starts
-CMD ["echo", "Hello, World!"]
+# Copy the current directory contents into the container at /app
+COPY . /app
+
+# Expose port 80 to the outside world
+EXPOSE 80
+
+# Run a simple HTTP server on port 80
+CMD ["python", "-m", "http.server", "80"]
