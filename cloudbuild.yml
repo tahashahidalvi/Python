@@ -1,6 +1,6 @@
 substitutions:
-  INSTANCE_NAME: "instance-20241009-184712"  # Replace with your actual instance name
-  ZONE: "us-central1-c"  # Replace with your actual zone
+  _INSTANCE_NAME: "instance-20241009-184712"  # Replace with your actual instance name
+  _ZONE: "us-central1-c"  # Replace with your actual zone
 
 logsBucket: gs://development-437521.appspot.com
 
@@ -34,11 +34,12 @@ steps:
       - 'compute'
       - 'instances'
       - 'reset'
-      - '${INSTANCE_NAME}'  # Using the substitution
-      - '--zone=${ZONE}'  # Using the substitution
+      - '${_INSTANCE_NAME}'  # Using the updated substitution
+      - '--zone=${_ZONE}'    # Using the updated substitution
 
 # Define the images being built and pushed
 images:
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest'
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest'
+
 
