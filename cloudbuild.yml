@@ -21,7 +21,7 @@ steps:
       - 'managed'
       - 'recreate-instances'
       - 'instance-group-1-m7r1'  # Replace with your actual MIG name
-      - '--zone=us-west1-a'  # Replace with the zone where your MIG is located (or use --region if it is regional)
+      - '--zone=us-central1-'  # Replace with the zone where your MIG is located (or use --region if it is regional)
 
 # Define the images being built and pushed
 images:
