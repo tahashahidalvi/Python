@@ -36,7 +36,7 @@ steps:
       - |
         INSTANCE_NAME="${INSTANCE_NAME}"  # Uses custom substitution
         ZONE="${ZONE}"  # Uses custom substitution
-        STATUS=$(gcloud compute instances describe $INSTANCE_NAME --zone=$ZONE --format='get(status)')
+        STATUS=$(gcloud compute instances describe $INSTANCE_NAME --zone=$ZONE --format='get(status)')  # Treated as a shell variable
         if [ "$STATUS" = "RUNNING" ]; then
           gcloud compute instances reset $INSTANCE_NAME --zone=$ZONE
         else
