@@ -14,9 +14,8 @@ steps:
     args: ['push', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest']
 
   # Step 3: Restart all instances in the Managed Instance Group (MIG) in the correct zone
- # Step 3: Restart all instances in the Managed Instance Group (MIG)
-- name: 'gcr.io/cloud-builders/gcloud'
-  args:
+ - name: 'gcr.io/cloud-builders/gcloud'
+   args:
     - 'compute'
     - 'instance-groups'
     - 'managed'
