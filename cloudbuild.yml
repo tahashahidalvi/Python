@@ -1,6 +1,3 @@
-
-logsBucket: gs://development-437521.appspot.com
-
 steps:
   # Step 1: Build and push the first Docker image using Dockerfile.app1
   - name: 'gcr.io/cloud-builders/docker'
@@ -22,8 +19,8 @@ steps:
       - 'managed'
       - 'rolling-action'
       - 'restart'
-      - 'instance-group-1'  # Replace with your actual MIG name
-      - '--region=us-central1'  # Replace with the region where your MIG is located
+      - 'instance-group-1'
+      - '--region=us-central1'
 
   # Step 4: Restart a specific instance if it is in the running state
   - name: 'gcr.io/cloud-builders/gcloud'
@@ -31,8 +28,8 @@ steps:
     args:
       - '-c'
       - |
-        INSTANCE_NAME="your-instance-name"  # Replace with your actual instance name
-        ZONE="us-central1-a"  # Replace with the zone where your instance is located
+        INSTANCE_NAME="${_INSTANCE_NAME}"  # Uses custom substitution
+        ZONE="${_ZONE}"  # Uses custom substitution
         STATUS=$(gcloud compute instances describe $INSTANCE_NAME --zone=$ZONE --format='get(status)')
         if [ "$STATUS" = "RUNNING" ]; then
           gcloud compute instances reset $INSTANCE_NAME --zone=$ZONE
@@ -44,4 +41,8 @@ steps:
 images:
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest'
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest'
+
+substitutions:
+  _INSTANCE_NAME: "instance-20241009-184712"  # Custom value
+  _ZONE: "us-central1-a"  # Custom value
 
