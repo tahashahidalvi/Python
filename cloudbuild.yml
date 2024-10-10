@@ -1,3 +1,7 @@
+substitutions:
+  _INSTANCE_NAME: "instance-20241009-184712"  # Replace with your instance name
+  _ZONE: "us-central1-a"  
+logsBucket: gs://development-437521.appspot.com
 
 steps:
   # Step 1: Build and push the first Docker image using Dockerfile.app1
@@ -42,8 +46,4 @@ steps:
 images:
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest'
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest'
-
-# Specify the logs bucket (Option 1)
-logsBucket: gs://your-bucket-name
-
 
