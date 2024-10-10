@@ -1,6 +1,8 @@
+
 substitutions:
   _INSTANCE_NAME: "instance-20241009-184712"  # Replace with your instance name
-  _ZONE: "us-central1-a"  
+  _ZONE: "us-central1-a"
+
 logsBucket: gs://development-437521.appspot.com
 
 steps:
