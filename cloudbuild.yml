@@ -1,18 +1,29 @@
 logsBucket: gs://development-437521.appspot.com
 
 steps:
-  # Build and push the first Docker image using Dockerfile.app1
+  # Step 1: Build and push the first Docker image using Dockerfile.app1
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'Dockerfile.app1', '-t', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest', '.']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest']
 
-  # Build and push the second Docker image using Dockerfile.app2
+  # Step 2: Build and push the second Docker image using Dockerfile.app2
   - name: 'gcr.io/cloud-builders/docker'
     args: ['build', '-f', 'Dockerfile.app2', '-t', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest', '.']
   - name: 'gcr.io/cloud-builders/docker'
     args: ['push', 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest']
 
+  # Step 3: Recreate the instances in the Managed Instance Group (MIG)
+  - name: 'gcr.io/cloud-builders/gcloud'
+    args:
+      - 'compute'
+      - 'instance-groups'
+      - 'managed'
+      - 'recreate-instances'
+      - 'instance-group-1-m7r1'  # Replace with your actual MIG name
+      - '--zone=us-west1-a'  # Replace with the zone where your MIG is located (or use --region if it is regional)
+
+# Define the images being built and pushed
 images:
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest'
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest'
