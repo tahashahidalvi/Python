@@ -1,3 +1,4 @@
+
 logsBucket: gs://development-437521.appspot.com
 
 steps:
@@ -19,13 +20,13 @@ steps:
       - 'compute'
       - 'instance-groups'
       - 'managed'
-      - 'recreate-instances'
+      - 'rolling-action'
+      - 'restart'
       - 'instance-group-1'  # Replace with your actual MIG name
-      - '--region=us-central1'  # Replace with the zone where your MIG is located (or use --region if it is regional)
+      - '--region=us-central1'  # Replace with the region where your MIG is located
 
 # Define the images being built and pushed
 images:
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app1:latest'
   - 'us-west4-docker.pkg.dev/development-437521/test-deployment/app2:latest'
-
 
